@@ -1,1 +1,1 @@
-# Hand-Written-Text-Recognition-with-Mytorch-Package
+# Hand-Written-Text-Recognition
