@@ -17,37 +17,39 @@ import string
 # returns a list of bounding boxes and black_and_white image
 def sort_bbox_row(val):
     return val[0]
+
 def sort_bbox_col(val):
     return val[1]
+
 def plot(img):
     plt.plot()
     plt.imshow(img, cmap = "gray")
     plt.show()
+
 def findLetters(image):
     bboxes = []
     bw = None
-    gray = rgb2gray(image)
-    blurred = gaussian(gray, 3)
-    thresh_value = threshold_otsu(blurred)
-    binary = blurred > thresh_value
+    gray = rgb2gray(image) # Convert image to gray scale
+    blurred = gaussian(gray, 3) # Apply with gaussian fileter
+    thresh_value = threshold_otsu(blurred) # Determine the threshold value
+    binary = blurred > thresh_value # Convert image to binary 
     binary = closing(binary)
     plot(binary)
-    label_img, num = label(binary, neighbors = 8, background = 1, return_num = True)
-    image_overlay = label2rgb(label_img, image = image, bg_label=0)
+    label_img, num = label(binary, neighbors = 8, background = 1, return_num = True) # Identify text patches
+    image_overlay = label2rgb(label_img, image = image, bg_label=0) # Seperate texts with background
 
     for region in regionprops(label_img):
         if region.area >= 200:
-            minr,minc,maxr,maxc = region.bbox
-            rect = mpatches.Rectangle((minc,minr),maxc-minc,maxr-minr,fill=False,
-                                       edgecolor = 'red', linewidth=1)
+            minr,minc,maxr,maxc = region.bbox # Get bounding boxes
             one_box = [minr,minc,maxr,maxc]
             bboxes.append(one_box)
 
-    bboxes.sort(key = sort_bbox_row)
+    bboxes.sort(key = sort_bbox_row) 
     minr_most = bboxes[0][0]
     dist_thresh = 50
     same_row = []
     row_sorted = []
+    # Group bounding boxes by row
     for bbox in bboxes:
         this_minr = bbox[0]
         if np.abs(this_minr - minr_most) < dist_thresh:
@@ -62,6 +64,7 @@ def findLetters(image):
         pass
        
     sorted_bboxes = []
+    # For each row, sort bounding boxes so that they are arranged from left to right
     for each_row_sorted in row_sorted:
         each_row_sorted.sort(key = sort_bbox_col)
         sorted_bboxes.append(each_row_sorted)
@@ -91,12 +94,15 @@ def get_letter_from_img(path):
             minc = bbox[1]
             maxr = bbox[2]
             maxc = bbox[3]
+            # If distance between two characters are more than 120, insert space
             if(prev_c != 0 and minc - prev_c > 120):
                 space.append(' ')
             else:
                 space.append('')
             prev_c = maxc
             patch = bw[minr:maxr,minc:maxc]
+
+            # Downsize the text
             downscale_r = (maxr-minr)//60
             downscale_c = (maxc-minc)//60
             if(downscale_r < 1):
@@ -105,12 +111,12 @@ def get_letter_from_img(path):
                 downscale_c = 1
             patch = downscale_local_mean(patch,(downscale_r, downscale_c))
             patch = resize(patch, (20,20))
+
+            # Add paddings
             patch = np.pad(patch,((6,6),(6,6)),mode='constant', constant_values = (1,1))
-            plot(patch)
             data = patch.T
             data = data.reshape(-1,)
             row_data.append(data)
-            pass
         img_data.append(row_data)
         spaces.append(space)
     letters = np.array([_ for _ in string.ascii_uppercase[:26]] + [str(_) for _ in range(10)])
