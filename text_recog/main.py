@@ -80,26 +80,29 @@ def test(model, spaces, test_data):
         prediction = np.argmax(out, axis = 1)
         prediction = letters[prediction]
         prediction = list(map(str, prediction))
-        prediction_space_seperated = ''.join(map(''.join, zip(row_space, prediction)))
+        prediction_space_seperated = ''.join(map(''.join, zip(row_space, prediction))) # Convert prediction to string along with blanks
         print(prediction_space_seperated)
         results.append(prediction_space_seperated)
     return results
 def main():
     lr = 0.01
+    # Load data
     train_data = io.loadmat('../data/nist36_train.mat')
     valid_data = io.loadmat('../data/nist36_valid.mat')
     train_x = train_data['train_data']
     train_y = train_data['train_labels']
-
     train_y = np.argmax(train_y, axis = 1)
     valid_x = valid_data['valid_data']
     valid_y = valid_data['valid_labels']
     valid_y = np.argmax(valid_y, axis = 1)
+
+    # Define model
     model = Sequential(Linear(1024, 128), ReLU(),
                        Linear(128, 36))
     optimizer = SGD(model.parameters(), lr = lr, momentum = 0.9)
     criterion = CrossEntropyLoss()
-    train(model, optimizer, criterion, train_x, train_y, valid_x, valid_y, num_epochs = 15)
+
+    train(model, optimizer, criterion, train_x, train_y, valid_x, valid_y, num_epochs = 3)
     spaces, test_data = get_letter_from_img("../images/test.jpg")
     test(model, spaces, test_data)
 if __name__ == '__main__':
