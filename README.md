@@ -44,4 +44,4 @@ Inference:
 <div align="center">
   <img src="result/result.jpg" width="300"/>
 </div>
-The model sometimes failed to recognize hard samples such as "0" and "O", "Z" and "2"
+The model sometimes failed to recognize hard samples such as "0" and "O", "1" and "I", "Z" and "2"
