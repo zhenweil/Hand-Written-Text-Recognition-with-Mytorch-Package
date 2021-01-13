@@ -6,14 +6,14 @@ Mytorch is a partial implementation of Pytorch library. It includes a framework 
 Another portion of this project is an image processing implementation. In this portion a hand-written note is given and the image processing function will detect and crop texts from it. The cropped texts are arranged by the same order as they appear in the image, and then fed into the neural network for classification. 
 
 ## Train
-The model structre is:
+Model structre:
 ```
 Linear(1024, 128)
 ReLU()
 Linear(128, 36)
 ```
 
-It was trained for 15 epochs with batch size of 50, and achieved 92% of validation accuracy.
+The model was trained for 15 epochs with batch size of 50, and achieved 92% of validation accuracy.
 
 ## Test
 Test image:
@@ -35,4 +35,10 @@ Crop texts:
 <div align="center">
   <img src="result/6.png" width="200"/>
   <img src="result/B.png" width="200"/>
+</div>
+
+Inference:
+<div align="center">
+  <img src="images/test.jpg" width="300"/>
+  <img src="result/result.jpg" width="300"/>
 </div>
