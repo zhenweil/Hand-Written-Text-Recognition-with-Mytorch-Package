@@ -20,3 +20,19 @@ Test image:
 <div align="center">
   <img src="images/test.jpg" width="300"/>
 </div>
+
+Convert to binary image:
+<div align="center">
+  <img src="result/binary.jpg" width="300"/>
+</div>
+
+Create bounding boxes:
+<div align="center">
+  <img src="result/bbox.jpg" width="300"/>
+</div>
+
+Crop texts:
+<div align="center">
+  <img src="result/6.jpg" width="300"/>
+  <img src="result/B.jpg" width="300"/>
+</div>
