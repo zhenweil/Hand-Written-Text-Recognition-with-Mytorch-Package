@@ -40,6 +40,7 @@ Crop texts:
 Inference:
 <div align="center">
   <img src="images/test.jpg" width="300"/>
-  
+</div>
+<div align="center">
   <img src="result/result.jpg" width="300"/>
 </div>
