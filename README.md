@@ -23,16 +23,16 @@ Test image:
 
 Convert to binary image:
 <div align="center">
-  <img src="result/binary.png" width="300"/>
+  <img src="result/binary.png" width="400"/>
 </div>
 
 Create bounding boxes:
 <div align="center">
-  <img src="result/bbox.png" width="300"/>
+  <img src="result/bbox.png" width="400"/>
 </div>
 
 Crop texts:
 <div align="center">
-  <img src="result/6.png" width="300"/>
-  <img src="result/B.png" width="300"/>
+  <img src="result/6.png" width="200"/>
+  <img src="result/B.png" width="200"/>
 </div>
