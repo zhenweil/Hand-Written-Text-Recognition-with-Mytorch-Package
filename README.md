@@ -18,5 +18,5 @@ It was trained for 15 epochs with batch size of 50, and achieved 92% of validati
 ## Test
 Test image:
 <div align="center">
-  <img src="images/test.jpg" width="250"/>
+  <img src="images/test.jpg" width="300"/>
 </div>
