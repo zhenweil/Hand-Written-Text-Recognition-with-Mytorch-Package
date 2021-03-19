@@ -13,7 +13,7 @@ ReLU()
 Linear(128, 36)
 ```
 
-The model was trained for 15 epochs with batch size of 50, and achieved 92% of validation accuracy.
+The model was trained for 15 epochs with batch size of 50, and achieved 94% of validation accuracy.
 
 ## Test
 Test image:
